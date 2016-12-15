@@ -38,18 +38,19 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 													MyInterface.alertMessage
 {
 	/**
-	 SERVER_IP="180.160.52.164";
-     SERVER_PORT=10052;
+	*Default SERVER_IP="127.0.0.1";
+     	*SERVER_PORT=10052;
+	*è‹¥è¦è®©ä¸åŒä¸»æœºä¹Ÿèƒ½åŠ å…¥ç¾¤èŠï¼Œè¯·å°†ä½ çš„æœºå™¨åšä¸€ä¸‹ç«¯å£æ˜ å°„
 	*/
 	private static final long serialVersionUID = 1L;
-	static  String path="LChatImages/";//Í¼Æ¬¶ÁÈ¡Â·¾¶
+	static  String path="LChatImages/";//å›¾ç‰‡è¯»å–è·¯å¾„
 	private JPanel contentPane; 
-	private JTextField userNameTextField;//ÏÔÊ¾ÊäÈë¿ò
-	private JTextField ServerIPStr;  //IpÊäÈë¿ò
-	private JTextField serverPortStr; //PortÊäÈë¿ò
-	private JButton submitButton;   //Ìá½»°´Å¥
-	public  DatagramSocket senderSocket; //·¢ËÍÏûÏ¢µÄSocket
-	public  String userName=""; //ÓÃ»§êÇ³Æ
+	private JTextField userNameTextField;//æ˜¾ç¤ºè¾“å…¥æ¡†
+	private JTextField ServerIPStr;  //Ipè¾“å…¥æ¡†
+	private JTextField serverPortStr; //Portè¾“å…¥æ¡†
+	private JButton submitButton;   //æäº¤æŒ‰é’®
+	public  DatagramSocket senderSocket; //å‘é€æ¶ˆæ¯çš„Socket
+	public  String userName=""; //ç”¨æˆ·æ˜µç§°
 	public  String server_ip;  
 	public 	int  server_port;
 	public  static LZMUDPClient f; 	
@@ -63,8 +64,8 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 	}
 	
 	public LZMUDPClient()
-	{	//»æÖÆ½çÃæ
-		setTitle("ÌîĞ´ĞÅÏ¢");
+	{	//ç»˜åˆ¶ç•Œé¢
+		setTitle("å¡«å†™ä¿¡æ¯");
 		setBounds(100,100,550,350);
 		setResizable(false);
 		
@@ -72,34 +73,34 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 	
-		//ÈÃ´°Ìå¾ÓÖĞ
+		//è®©çª—ä½“å±…ä¸­
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		setLocation((screenSize.width - getWidth()) / 2,
 					(screenSize.height - getHeight()) / 2);
-		//»æÖÆ±³¾°Í¼Æ¬
+		//ç»˜åˆ¶èƒŒæ™¯å›¾ç‰‡
 		path+="Bg.png";
 		ImageIcon background=new ImageIcon(path);
 		JLabel lblNewLabel = new JLabel(background);
 		lblNewLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
-		// °ÑÄÚÈİ´°¸ñ×ª»¯ÎªJPanel£¬·ñÔò²»ÄÜÓÃ·½·¨setOpaque()À´Ê¹ÄÚÈİ´°¸ñÍ¸Ã÷
+		// æŠŠå†…å®¹çª—æ ¼è½¬åŒ–ä¸ºJPanelï¼Œå¦åˆ™ä¸èƒ½ç”¨æ–¹æ³•setOpaque()æ¥ä½¿å†…å®¹çª—æ ¼é€æ˜
 		JPanel imagePanel = (JPanel) this.getContentPane();
 		imagePanel.setOpaque(false);
-		// °Ñ±³¾°Í¼Æ¬Ìí¼Óµ½·Ö²ã´°¸ñµÄ×îµ×²ã×÷Îª±³¾°
+		// æŠŠèƒŒæ™¯å›¾ç‰‡æ·»åŠ åˆ°åˆ†å±‚çª—æ ¼çš„æœ€åº•å±‚ä½œä¸ºèƒŒæ™¯
 		getLayeredPane().add(lblNewLabel, new Integer(Integer.MIN_VALUE));
 		contentPane.setLayout(null);
 		
-		submitButton = new JButton("È·¶¨");
+		submitButton = new JButton("ç¡®å®š");
 		submitButton.setBackground(Color.LIGHT_GRAY);
 		submitButton.setBounds(244, 253, 86, 29);
 		contentPane.add(submitButton);
 		submitButton.addActionListener(this);
-		submitButton.setFont(new Font("ËÎÌå", Font.BOLD, 18));
+		submitButton.setFont(new Font("å®‹ä½“", Font.BOLD, 18));
 		
-		JLabel label2 = new JLabel("·şÎñÆ÷IP:");
+		JLabel label2 = new JLabel("æœåŠ¡å™¨IP:");
 		label2.setBounds(114, 156, 105, 21);
 		contentPane.add(label2);
-		label2.setFont(new Font("ËÎÌå", Font.BOLD, 18));
+		label2.setFont(new Font("å®‹ä½“", Font.BOLD, 18));
 		userNameTextField = new JTextField(17);
 		userNameTextField.addKeyListener(new KeyAdapter() {
 			@Override
@@ -110,7 +111,7 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 		});
 		userNameTextField.setBounds(224, 100, 154, 27);
 		contentPane.add(userNameTextField);
-		userNameTextField.setFont(new Font("ËÎÌå", Font.BOLD, 18));
+		userNameTextField.setFont(new Font("å®‹ä½“", Font.BOLD, 18));
 		userNameTextField.setMaximumSize(userNameTextField.getPreferredSize());
 		ServerIPStr = new JTextField(12);
 		ServerIPStr.addKeyListener(new KeyAdapter() {
@@ -122,27 +123,27 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 		});
 		ServerIPStr.setBounds(224, 153, 154, 29);
 		contentPane.add(ServerIPStr);
-		ServerIPStr.setFont(new Font("ËÎÌå", Font.BOLD, 18));
+		ServerIPStr.setFont(new Font("å®‹ä½“", Font.BOLD, 18));
 		ServerIPStr.setMaximumSize(ServerIPStr.getPreferredSize());
 		//imagePanel.add(lblNewLabel);
 
-		JLabel label1 = new JLabel("ÄãµÄêÇ³Æ:");
+		JLabel label1 = new JLabel("ä½ çš„æ˜µç§°:");
 		label1.setBounds(114, 103, 91, 21);
 		contentPane.add(label1);
-		label1.setFont(new Font("ËÎÌå", Font.BOLD, 18));
+		label1.setFont(new Font("å®‹ä½“", Font.BOLD, 18));
 		
-		JLabel lblNewLabel_5 = new JLabel("»¶Ó­À´µ½LChatting!!!");
-		lblNewLabel_5.setFont(new Font("ËÎÌå", Font.BOLD, 18));
+		JLabel lblNewLabel_5 = new JLabel("æ¬¢è¿æ¥åˆ°LChatting!!!");
+		lblNewLabel_5.setFont(new Font("å®‹ä½“", Font.BOLD, 18));
 		lblNewLabel_5.setBounds(177, 52, 212, 29);
 		contentPane.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_1 = new JLabel("·şÎñÆ÷¶Ë¿ÚºÅ:");
-		lblNewLabel_1.setFont(new Font("ËÎÌå", Font.BOLD, 18));
+		JLabel lblNewLabel_1 = new JLabel("æœåŠ¡å™¨ç«¯å£å·:");
+		lblNewLabel_1.setFont(new Font("å®‹ä½“", Font.BOLD, 18));
 		lblNewLabel_1.setBounds(86, 207, 133, 29);
 		contentPane.add(lblNewLabel_1);
-		//Enter¼ü°ó¶¨È·¶¨°´Å¥
+		//Enteré”®ç»‘å®šç¡®å®šæŒ‰é’®
 		serverPortStr = new JTextField();
-		serverPortStr.setFont(new Font("ËÎÌå", Font.BOLD, 18));
+		serverPortStr.setFont(new Font("å®‹ä½“", Font.BOLD, 18));
 		serverPortStr.setBounds(224, 209, 154, 27);
 		serverPortStr.addKeyListener(new KeyListener()
 		{
@@ -151,7 +152,7 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 			{
 				// TODO Auto-generated method stub
 				if(e.getKeyCode()==KeyEvent.VK_ENTER)
-					isLegal();//¼ì²âÊÇ·ñÄÜÁ¬ÉÏ·şÎñÆ÷
+					isLegal();//æ£€æµ‹æ˜¯å¦èƒ½è¿ä¸ŠæœåŠ¡å™¨
 			}
 			
 			@Override
@@ -187,41 +188,41 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 		}
 	}
 	
-	//µ¯³ö¾¯¸æĞÅÏ¢
+	//å¼¹å‡ºè­¦å‘Šä¿¡æ¯
 	@Override
 	public void alertMsg(String msg)
 	{
-		JOptionPane.showMessageDialog(null, msg, "ÌáÊ¾", JOptionPane.WARNING_MESSAGE); 
+		JOptionPane.showMessageDialog(null, msg, "æç¤º", JOptionPane.WARNING_MESSAGE); 
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e)
-	{//´Ëº¯ÊıÓÃÀ´ÅĞ¶ÏÓÃ»§ÊäÈëĞÅÏ¢ÊÇ·ñºÏ·¨£¬Èç¹ûºÏ·¨ÔòÒş²Ø¸Ãframe²¢ÏÔÊ¾¸¸´°¿Ú
+	{//æ­¤å‡½æ•°ç”¨æ¥åˆ¤æ–­ç”¨æˆ·è¾“å…¥ä¿¡æ¯æ˜¯å¦åˆæ³•ï¼Œå¦‚æœåˆæ³•åˆ™éšè—è¯¥frameå¹¶æ˜¾ç¤ºçˆ¶çª—å£
 		if(e.getSource()==submitButton)
 		{
 			isLegal();
 		}
 	}
-	//ÅĞ¶ÏÓÃ»§ÊäÈëĞÅÏ¢ÊÇ·ñºÏ·¨£¬Èç¹ûºÏ·¨ÔòÒş²Ø¸Ãframe²¢ÏÔÊ¾¸¸´°¿Ú
+	//åˆ¤æ–­ç”¨æˆ·è¾“å…¥ä¿¡æ¯æ˜¯å¦åˆæ³•ï¼Œå¦‚æœåˆæ³•åˆ™éšè—è¯¥frameå¹¶æ˜¾ç¤ºçˆ¶çª—å£
 	public void isLegal()
 	{
 		String name=userNameTextField.getText();
 		int port=Integer.valueOf(serverPortStr.getText());
 		String ip=ServerIPStr.getText();
-		//ÕâÀï²»ÄÜÓÃ==À´ÅĞ¶Ï£¬±ØĞëÓÃequalsÀ´ÅĞ¶Ï
+		//è¿™é‡Œä¸èƒ½ç”¨==æ¥åˆ¤æ–­ï¼Œå¿…é¡»ç”¨equalsæ¥åˆ¤æ–­
 		if(name.equals(""))
-			alertMsg("êÇ³Æ²»ÄÜÎª¿Õ£¡");
+			alertMsg("æ˜µç§°ä¸èƒ½ä¸ºç©ºï¼");
 		else
 		{
 			if(isSuccessfullyConnected(ip,port))
 			{
-				alertMsg("³É¹¦Á¬½Ó·şÎñÆ÷!");
+				alertMsg("æˆåŠŸè¿æ¥æœåŠ¡å™¨!");
 				setInfo(name, ip, port);
 				setVisible(false);
 				ClientFrame clientFrame = null;
 				try
 				{
-					//¼ÓÔØ×Ó´°¿Ú£¬²¢½«¸¸Àà´«µİ¸ø×ÓÀà
+					//åŠ è½½å­çª—å£ï¼Œå¹¶å°†çˆ¶ç±»ä¼ é€’ç»™å­ç±»
 					clientFrame = new ClientFrame(f);
 				}
 				catch (IOException e1)
@@ -231,10 +232,10 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 				clientFrame.setVisible(true);
 			}
 			else 
-				alertMsg("Á¬½Ó·şÎñÆ÷Ê§°Ü!");
+				alertMsg("è¿æ¥æœåŠ¡å™¨å¤±è´¥!");
 		}
 	}
-	//¼ì²âÊÇ·ñ³É¹¦Á¬½ÓÉÏ·şÎñÆ÷£¬4sÖÓÈç¹û»¹Ã»Á¬ÉÏ¾ÍÁ¬½ÓÊ§°Ü
+	//æ£€æµ‹æ˜¯å¦æˆåŠŸè¿æ¥ä¸ŠæœåŠ¡å™¨ï¼Œ4sé’Ÿå¦‚æœè¿˜æ²¡è¿ä¸Šå°±è¿æ¥å¤±è´¥
 	public boolean isSuccessfullyConnected(String ip,int port) 
 	{
 		InetAddress serverIp;
@@ -246,8 +247,8 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 		{
 			return false;
 		}
-		//¼ì²âÁ¬½ÓĞÅÏ¢
-		String testMsg="ÉÏÏß"+" "+userNameTextField.getText();
+		//æ£€æµ‹è¿æ¥ä¿¡æ¯
+		String testMsg="ä¸Šçº¿"+" "+userNameTextField.getText();
 		byte[] data=testMsg.getBytes();
 		DatagramPacket senderPacket = new DatagramPacket(data, data.length, serverIp, port );
 		byte[] buf=new byte[1024];
@@ -261,7 +262,7 @@ public class LZMUDPClient extends JFrame implements ActionListener,
 			alertMsg("IOException Caught in LZMUDPClient.java 249");
 		};
 		try
-		{//ÉçÖÃÊ±¼äÆ¬µÈ´ıÊ±¼äÎª4s
+		{//ç¤¾ç½®æ—¶é—´ç‰‡ç­‰å¾…æ—¶é—´ä¸º4s
 			senderSocket.setSoTimeout(4000);
 			try
 			{
