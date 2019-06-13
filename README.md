@@ -1,6 +1,5 @@
 # LChat
-### A simple chatting room.
-### Technology: Java Swing, UDP, Thread.
+### A simple chatting room
 ### Functions:
 + Chatting in the same room for multi-users
 + Printing history
